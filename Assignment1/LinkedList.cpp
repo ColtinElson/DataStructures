@@ -1,5 +1,6 @@
 //
 // Created by Coltin Elson on 1/15/18.
+// based on code from Hal O'connell
 //
 
 #include <iostream>
@@ -281,16 +282,21 @@ using namespace std;
         return output;
     }
 
+//count how many nodes are present
 int LinkedList::CountNodes() {
+    //initially none
     int numberOfNodes = 0;
 
+    //get the first node
     Node *currentNode = first;
 
+    //while the node isn't null, loop through and add 1 to number of nodes
     while (currentNode != nullptr)
     {
         numberOfNodes++;
         currentNode = currentNode->next;
     }
 
+    //return number of nodes
     return numberOfNodes;
 }

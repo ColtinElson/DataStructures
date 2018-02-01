@@ -1,5 +1,6 @@
 //
 // Created by Coltin Elson on 1/15/18.
+// based on code from Hal O'connell
 //
 
 #ifndef ASSIGNMENT1_NODE_H
