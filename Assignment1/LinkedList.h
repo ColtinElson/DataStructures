@@ -10,9 +10,6 @@
 using namespace std;
 
 class LinkedList {
-private:
-    //The initial node of the list
-    Node *first;
 
 public:
     //default constuctor
@@ -22,25 +19,28 @@ public:
     virtual ~LinkedList();
 
     //Add an item to the end of the list
-    void Add(int num);
+    void Add(string value);
 
     //delete a node from the list based on its value
-    void DeleteValue(int value);
+    void DeleteValue(string value);
 
     //delete a node from the list based on its position
-    void DeleteNode(int nodenum);
+    void DeleteNode(int nodeNumber);
 
     //insert a new value into the list after a specified value
-    void InsertAfterValue(int value, int num);
+    void InsertAfterValue(string existingValue, string newValue);
 
     //insert a new value into the list before the specified node
-    void InsertBeforeNode(int nodenum, int num);
+    void InsertBeforeNode(int nodeNumber, string newValue);
 
     //overloaded friend function output
     friend ostream &operator<<(ostream &output, LinkedList &list);
 
+    int CountNodes();
 
 
+//The initial node of the list
+Node *first;
 };
 
 

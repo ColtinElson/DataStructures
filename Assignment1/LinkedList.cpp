@@ -30,13 +30,13 @@ using namespace std;
         }
     }
 
-    void LinkedList::Add(int num)
+    void LinkedList::Add(string value)
     {
         //make a new nodeToAdd to be added
         Node *nodeToAdd = new Node();
 
         //make the new nodeToAdd's data equal to what you want to insert
-        nodeToAdd->data = num;
+        nodeToAdd->data = value;
 
         //if the list is empty, add it to the beginning
         if (first == nullptr)
@@ -66,7 +66,7 @@ using namespace std;
     }
 
     //delete a node based on it's value
-    void LinkedList::DeleteValue(int value)
+    void LinkedList::DeleteValue(string value)
     {
         //get the first node and initialize a value for the previous node
         Node *node = first;
@@ -109,7 +109,7 @@ using namespace std;
     }
 
     //delete a node based on the node position
-    void LinkedList::DeleteNode(int nodenum)
+    void LinkedList::DeleteNode(int nodeNumber)
     {
         //set the index equal to -1
         int index = -1;
@@ -125,7 +125,7 @@ using namespace std;
             index++;
 
             //if the index is equal to the position wanted
-            if (index == nodenum)
+            if (index == nodeNumber)
             {
                 //break out of the loop
                 break;
@@ -157,20 +157,20 @@ using namespace std;
     }
 
     //insert a new node after a node containing the specified data
-    void LinkedList::InsertAfterValue(int value, int num)
+    void LinkedList::InsertAfterValue(string existingValue, string newValue)
     {
         //Make a new node and give it the data
         Node *newNode = new Node();
-        newNode->data = num;
+        newNode->data = newValue;
 
         //get the first node
         Node *node = first;
 
         //loop through the list until you find the specified node
-        while (prev != nullptr)
+        while (node != nullptr)
         {
             //if the current node is the on you want
-            if (node->data == value)
+            if (node->data == existingValue)
             {
                 //break out of the loop
                 break;
@@ -194,25 +194,25 @@ using namespace std;
                 //set the new node's next to be whatever was in that position
                 newNode->next = node->next;
                 //set the old node's next to be the new node
-                node->next = node;
+                node->next = newNode;
             }
                 //if you can't find the node in the list
             else
             {
                 //add the new node to the end of the list
-                Add(num);
+                Add(newValue);
             }
         }
     }
 
     //insert a new value before the current index
-    void LinkedList::InsertBeforeNode(int nodenum, int num)
+    void LinkedList::InsertBeforeNode(int nodenum, string newValue)
     {
         //set the index to -1 initially
         int index = -1;
         //then make a new node with given data
         Node *newNode = new Node();
-        newNode->data = num;
+        newNode->data = newValue;
         //then get the current and previous nodes
         Node *currentNode = first;
         Node *previousNode = first;
@@ -247,16 +247,16 @@ using namespace std;
             //if the current node is not a nullptr
             if (currentNode != nullptr)
             {
-                //set the new node's next to be whatever was in that position
-                newNode->next = currentNode->next;
-                //set the old node's next to be the new node
-                currentNode->next = currentNode;
+                //set the previous node to point to the new node
+                previousNode->next = newNode;
+                //then set the new node to point to the current node
+                newNode->next = currentNode;
             }
                 //if you can't find the node in the list
             else
             {
                 //add the new node to the end of the list
-                Add(num);
+                Add(newValue);
             }
         }
 
@@ -268,13 +268,29 @@ using namespace std;
         //get the first item in the list
         Node *currentNode = list.first;
 
+        int nodeNumber = 1;
         //while there is more items in the list
         while (currentNode != nullptr)
         {
             //output the data for the given node and then loop to the next node
-            output << "data = " << currentNode->data << endl;
+            output << nodeNumber << " - " << currentNode->data << endl;
             currentNode = currentNode->next;
+            nodeNumber++;
         }
         //return the output
         return output;
     }
+
+int LinkedList::CountNodes() {
+    int numberOfNodes = 0;
+
+    Node *currentNode = first;
+
+    while (currentNode != nullptr)
+    {
+        numberOfNodes++;
+        currentNode = currentNode->next;
+    }
+
+    return numberOfNodes;
+}

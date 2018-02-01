@@ -7,11 +7,13 @@
 
 #include <string>
 
+using namespace std;
+
 class Node
 {
 public:
     //Data in the linked list
-    int data;
+    string data;
 
     //Pointer pointing to the next node
     Node *next;
@@ -20,7 +22,7 @@ public:
     //Constructs the pointer to a null pointer,
     //assuming there is no other nodes in the link
     //also assign data to an empty string
-    Node() : next(nullptr), data(-1) {}
+    Node() : next(nullptr), data("") {}
 
 };
 

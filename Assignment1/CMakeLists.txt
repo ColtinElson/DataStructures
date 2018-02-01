@@ -3,4 +3,4 @@ project(Assignment1)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(Assignment1 main.cpp LinkedList.cpp LinkedList.h Node.cpp Node.h)
+add_executable(Assignment1 main.cpp LinkedList.cpp LinkedList.h Node.cpp Node.h Editor.cpp Editor.h)
