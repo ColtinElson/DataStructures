@@ -18,7 +18,7 @@ LinkedList Editor::ReadFileIntoList(string fileName)
     while (getline(file, line))
     {
         //if they have something in them
-        if (!line.empty() && line.length()>0)
+        if (!line.empty())
         {
             //add them to list
             tempFile.Add(line);
