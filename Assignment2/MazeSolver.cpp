@@ -134,7 +134,7 @@ void MazeSolver::SolveMaze(Stack &maze)
         //set values in stack to #
         mazeArray[xCoord][yCoord] = '#';
 
-        //remove valueu from stack
+        //remove value from stack
         path.Pop();
     }
 
