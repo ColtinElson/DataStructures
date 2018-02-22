@@ -5,7 +5,7 @@
 #include "MazeReader.h"
 
 
-void MazeReader::ReadFileIntoArray(Stack& maze, string fileName)
+void MazeReader::ReadFileIntoStack(Stack& maze, string fileName)
 {
     //open file
     ifstream file;
