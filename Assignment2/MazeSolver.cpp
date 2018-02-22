@@ -16,6 +16,7 @@ void MazeSolver::SolveMaze(Stack &maze)
     string firstLine = maze.Peek();
     int numChars = 0;
     for (char current : firstLine) {
+        //if its a maze square, add 1 to numChars
         if (current == '+'
                 || current == '-'
                 || current == '|'
@@ -119,16 +120,7 @@ void MazeSolver::SolveMaze(Stack &maze)
 
     int pathLength = path.GetStackSize();
 
-    //print maze
-    for (int i = 0; i < numLines; i++)
-    {
-        for (int j = 0; j < numChars; j++)
-        {
-            cout << mazeArray[i][j];
-        }
-        cout << endl;
-    }
-
+    //set path spots to # to indicate path through maze
     for (int i = 0; i < pathLength; i++)
     {
         int xCoord = 0;
@@ -136,6 +128,7 @@ void MazeSolver::SolveMaze(Stack &maze)
         int yTester = 0;
         string xString = path.Peek().substr(0,path.Peek().find(','));
         string yString = path.Peek().substr(xString.length()+1);
+
         //parse currentCell for coords
         stringstream xValue(xString);
         xValue >> xCoord;
@@ -143,17 +136,19 @@ void MazeSolver::SolveMaze(Stack &maze)
         stringstream yValue(yString);
         yValue >> yCoord;
 
+        //set values in stack to #
         mazeArray[xCoord][yCoord] = '#';
 
-        cout << path.Peek() << " : " << xCoord << "," << yCoord << "/" << yTester << " | X: " << xString << " | " << yString << endl;
-
+        //remove valueu from stack
         path.Pop();
     }
+
     //print maze
     for (int i = 0; i < numLines; i++)
     {
         for (int j = 0; j < numChars; j++)
         {
+            //turn visited squares back to whitespace
             if (mazeArray[i][j] == '.')
             {
                 mazeArray[i][j] = ' ';
@@ -163,8 +158,7 @@ void MazeSolver::SolveMaze(Stack &maze)
         cout << endl;
     }
 
-
-
+    //turn maze back into stack
     for (int i = numLines-1; i >= 0; i--)
     {
         string line;
