@@ -7,7 +7,6 @@ void MazeSolver::SolveMaze(Stack &maze)
 {
     int numLines = maze.GetStackSize();
 
-    cout << numLines << endl;
     //get num of columns for matrix
     string firstLine = maze.Peek();
     int numChars = 0;
@@ -65,9 +64,25 @@ void MazeSolver::SolveMaze(Stack &maze)
 
         //check available neighbours of the current cell
 
-        //check south and east first to bias towards that direction
+        //check south and east last to bias towards that direction
 
-        //check south first
+        //First check north
+        if ((xCoord-1) >= 0 && mazeArray[xCoord-1][yCoord] == ' ')
+        {
+            mazeArray[xCoord-1][yCoord] = '.';
+            newCell = to_string(xCoord-1) + "," + to_string(yCoord);
+            path.Push(newCell);
+        }
+
+        //next check west
+        if ((yCoord-1) >= 0 && mazeArray[xCoord][yCoord-1] == ' ')
+        {
+            mazeArray[xCoord][yCoord-1] = '.';
+            newCell = to_string(xCoord) + "," + to_string(yCoord-1);
+            path.Push(newCell);
+        }
+
+        //then south
         if ((xCoord+1) < numLines && mazeArray[xCoord+1][yCoord] == ' ')
         {
             mazeArray[xCoord+1][yCoord] = '.';
@@ -75,7 +90,7 @@ void MazeSolver::SolveMaze(Stack &maze)
             path.Push(newCell);
         }
 
-        //then check east
+        //Finally check east
         if ((yCoord+1) < numChars && mazeArray[xCoord][yCoord+1] == ' ')
         {
             mazeArray[xCoord][yCoord+1] = '.';
@@ -85,22 +100,6 @@ void MazeSolver::SolveMaze(Stack &maze)
             {
                 break;
             }
-        }
-
-        //then check north
-        if ((xCoord-1) >= 0 && mazeArray[xCoord-1][yCoord] == ' ')
-        {
-            mazeArray[xCoord-1][yCoord] = '.';
-            newCell = to_string(xCoord-1) + "," + to_string(yCoord);
-            path.Push(newCell);
-        }
-
-        //finally check west
-        if ((yCoord-1) >= 0 && mazeArray[xCoord][yCoord-1] == ' ')
-        {
-            mazeArray[xCoord][yCoord-1] = '.';
-            newCell = to_string(xCoord) + "," + to_string(yCoord-1);
-            path.Push(newCell);
         }
 
         //if no viable neighbour was found
