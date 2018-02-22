@@ -1,7 +1,3 @@
-//
-// Created by nscc on 2/21/18.
-//
-
 #ifndef ASSIGNMENT2_MAZEREADER_H
 #define ASSIGNMENT2_MAZEREADER_H
 #include <iostream>

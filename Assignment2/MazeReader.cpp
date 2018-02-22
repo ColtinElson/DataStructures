@@ -1,7 +1,3 @@
-//
-// Created by nscc on 2/21/18.
-//
-
 #include "MazeReader.h"
 
 

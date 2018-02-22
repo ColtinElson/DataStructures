@@ -1,7 +1,3 @@
-//
-// Created by nscc on 2/21/18.
-//
-
 #ifndef ASSIGNMENT2_MAZESOLVER_H
 #define ASSIGNMENT2_MAZESOLVER_H
 
