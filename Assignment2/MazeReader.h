@@ -13,7 +13,7 @@ using namespace std;
 class MazeReader
 {
 public:
-    static int ReadFileIntoArray(Stack& maze, string fileName);
+    static void ReadFileIntoArray(Stack& maze, string fileName);
 
     static bool CheckFile(string fileName);
 

@@ -67,3 +67,21 @@ ostream& operator<<( ostream& output, Stack& stack )
     return output;
 }
 
+int Stack::GetStackSize() {
+
+    int stackSize = 0;
+
+    //get the top node
+    StackNode *node = Stack::_top;
+
+    //while it's not null
+    while( node != nullptr )
+    {
+        //add 1 to the stack size
+        stackSize++;
+        node = node->getNext();
+    }
+    return stackSize;
+
+}
+

@@ -27,6 +27,8 @@ public:
     //delete the top node from the stack
     myerror_code Pop();
 
+    int GetStackSize();
+
     //overloaded output operator of stack
     friend ostream& operator<<( ostream& output, Stack& stack );
 };

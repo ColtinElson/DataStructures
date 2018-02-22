@@ -10,9 +10,10 @@
 class MazeSolver {
 
 public:
-    static void SolveMaze(Stack &maze, int numLines);
+    static void SolveMaze(Stack &maze);
 
-    static void SaveStackIntoFile(Stack &maze, string fileName, int numLines);
+    static void SaveStackIntoFile(Stack &maze, string fileName);
+
 };
 
 

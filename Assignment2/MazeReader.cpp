@@ -5,7 +5,7 @@
 #include "MazeReader.h"
 
 
-int MazeReader::ReadFileIntoArray(Stack& maze, string fileName)
+void MazeReader::ReadFileIntoArray(Stack& maze, string fileName)
 {
     //open file
     ifstream file;
@@ -13,20 +13,18 @@ int MazeReader::ReadFileIntoArray(Stack& maze, string fileName)
     //declare string and a temporary stack variables
     string line;
     Stack temp;
-    //count the number of lines in file
-    int numLines = 0;
     //while there are lines to read
     while (getline(file, line))
     {
         //if they have something in them
         if (!line.empty())
         {
-            numLines ++;
             //add them to stack
             temp.Push(line);
         }
     }
 
+    int numLines = temp.GetStackSize();
     //loop through the temp stack and add each node to the maze stack
     //this reverses the stack
     for (int i = 0; i < numLines; i++)
@@ -37,8 +35,6 @@ int MazeReader::ReadFileIntoArray(Stack& maze, string fileName)
 
     //close the file
     file.close();
-
-    return numLines;
 }
 
 bool MazeReader::CheckFile(string fileName) {

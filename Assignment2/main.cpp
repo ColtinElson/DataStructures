@@ -25,7 +25,6 @@ int main()
     Stack maze;
     string mazeFile;
     bool moveOn = false;
-    int numLines = 0;
 
     cout << "Welcome to the maze solver!" << endl;
     cout << "This program will take a maze you give it and spit out a solution!" << endl << endl;
@@ -43,7 +42,7 @@ int main()
         }
     }
 
-    numLines = MazeReader::ReadFileIntoArray(maze, mazeFile);
+    MazeReader::ReadFileIntoArray(maze, mazeFile);
 
     cout << maze << endl;
 
@@ -51,8 +50,8 @@ int main()
 
     getline(cin, mazeFile);
 
-    MazeSolver::SolveMaze(maze, numLines);
+    MazeSolver::SolveMaze(maze);
 
-    MazeSolver::SaveStackIntoFile(maze, mazeFile, numLines);
+    MazeSolver::SaveStackIntoFile(maze, mazeFile);
     return 0;
 }
