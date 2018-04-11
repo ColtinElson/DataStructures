@@ -1,14 +1,24 @@
 #include <iostream>
 #include <cstdlib>
-#include "SortingMethods.h"
+#include "BubbleSort.h"
+#include "SelectionSort.h"
+#include "InsertionSort.h"
+#include "ShellSort.h"
+#include "MergeSort.h"
+#include "QuickSort.h"
+#include "SortingOutput.h"
+
+void resetArray(int *array, int arraySize);
 
 using namespace std;
 
 int main() {
+    //initialize variables
+    bool writeToFile = false;
     string userInput;
     int arraySize = 0;
-    int *array, *unsortedArray;
-    SortingMethods sortingMethods;
+    int *array, *temporaryArray;
+
     //Welcome message
     cout << "Welcome to the Sorting Method Compare Class!" << endl;
     cout << "This class will take generate an array of a random size, sort it using"
@@ -16,40 +26,103 @@ int main() {
     //prompt user for array size
     cout << "To begin, what size array would you like to use? " << endl;
 
+    //loop until user inputs a number or a number with w
     bool moveOn = false;
 
     while(!moveOn)
     {
         getline(cin, userInput);
-        try
+
+        if (userInput == "1000 w")
         {
-            arraySize = stoi(userInput);
+            arraySize = 1000;
+            writeToFile = true;
             moveOn = true;
         }
-        catch(invalid_argument)
+        else
         {
-            cout << "You need to input a valid number! Please try again: " << endl;
-           moveOn = false;
+            //try to parse a number
+            try
+            {
+                arraySize = stoi(userInput);
+                moveOn = true;
+            }
+            catch(invalid_argument)
+            {
+                cout << "You need to input a valid number! Please try again: " << endl;
+                moveOn = false;
+            }
         }
     }
-    cout << "Your array will be size: " << arraySize << endl;
-
-    unsortedArray = new int[arraySize];
+    //initialize arrays
     array = new int[arraySize];
+    temporaryArray = new int[arraySize];
 
-    for (int i = 0; i < arraySize; i++)
+    //for each sorting method, reset the array to unsorted, sort and display the time and then save to a file if needed
+
+    resetArray(array, arraySize);
+
+    cout << endl << "Bubble Sorted in " <<BubbleSort::bubbleSort(array, arraySize) << " seconds" << endl;
+
+    if(writeToFile)
     {
-        unsortedArray[i] = (rand() % 32767) +1;
-        array[i] = unsortedArray[i];
+        SortingOutput::saveArrayToFile(array, arraySize, "BubbleSort.txt");
     }
-    cout << endl << " Bubble Sorted in " << sortingMethods.bubbleSort(array, arraySize) << " seconds" << endl;
 
+    resetArray(array, arraySize);
 
-    for (int i = 0; i < arraySize; i++)
+    cout << "Selection Sorted in " << SelectionSort::selectionSort(array, arraySize) << " seconds" << endl;
+
+    if(writeToFile)
     {
-        array[i] = unsortedArray[i];
+        SortingOutput::saveArrayToFile(array, arraySize, "SelectionSort.txt");
     }
-    cout << endl << " Selection Sorted in " << sortingMethods.selectionSort(array, arraySize) << " seconds" << endl;
+
+    resetArray(array, arraySize);
+
+    cout << "Insertion Sorted in " << InsertionSort::insertionSort(array, arraySize) << " seconds" << endl;
+
+    if(writeToFile)
+    {
+        SortingOutput::saveArrayToFile(array, arraySize, "InsertionSort.txt");
+    }
+
+    resetArray(array, arraySize);
+
+    cout << "Shell Sorted in " << ShellSort::shellSort(array, arraySize) << " seconds" << endl;
+
+    if(writeToFile)
+    {
+        SortingOutput::saveArrayToFile(array, arraySize, "ShellSort.txt");
+    }
+
+    resetArray(array, arraySize);
+
+    cout << "Merge Sorted in " << MergeSort::mergeSortTimer(array, arraySize,temporaryArray) << " seconds" << endl;
+
+    if(writeToFile)
+    {
+        SortingOutput::saveArrayToFile(array, arraySize, "MergeSort.txt");
+    }
+
+    resetArray(array, arraySize);
+
+    cout << "Quick Sorted in " << QuickSort::quickSortTimer(array, arraySize) << " seconds" << endl;
+
+    if(writeToFile)
+    {
+        SortingOutput::saveArrayToFile(array, arraySize, "QuickSort.txt");
+    }
 
     return 0;
+}
+
+void resetArray(int *array, int arraySize)
+{
+    //gets random numbers based on array size
+    //rand will always get the same numbers
+    for (int i = 0; i < arraySize; i++)
+    {
+        array[i] = (rand() % 32767) +1;
+    }
 }
