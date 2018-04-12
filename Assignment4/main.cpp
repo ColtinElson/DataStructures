@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include "SequentialSearch.h"
 #include "BinarySearch.h"
 #include "BinarySearchTree.h"
@@ -61,26 +63,69 @@ int main()
 
     cout << "Now for the fun stuff! Auto-balancing Binary Search Trees!" << endl;
 
-    binarySearchTree.Insert(5);
-    binarySearchTree.Insert(3);
-    binarySearchTree.Insert(7);
-    binarySearchTree.Insert(2);
-    binarySearchTree.Insert(1);
-    binarySearchTree.Insert(4);
-    binarySearchTree.Insert(6);
-    binarySearchTree.Insert(8);
-    binarySearchTree.Insert(10);
-    binarySearchTree.Insert(13);
-    binarySearchTree.Insert(19);
-    binarySearchTree.Insert(16);
-    binarySearchTree.Insert(14);
-    binarySearchTree.Insert(17);
-    binarySearchTree.Insert(20);
-    binarySearchTree.Insert(18);
-    binarySearchTree.Insert(11);
+    //populate the tree
+    binarySearchTree.ReadFromFile(binarySearchTree, "/home/nscc/Desktop/PROG2400/DataStructures/Assignment4/Resources/dictionary.txt");
 
+    cout << "Here is the binary tree: " << endl;
 
+    //print the tree
     cout << binarySearchTree << endl;
+
+    cin.ignore();
+
+    cout << "We will now check the misspelled document to see what words are misspelled." << endl << endl;
+
+    cout << "Misspelled Words: " << endl;
+
+    //open file
+    ifstream file;
+    file.open("/home/nscc/Desktop/PROG2400/DataStructures/Assignment4/Resources/mispelled.txt");
+    //declare string variable
+    string line;
+
+    //while there are lines to read
+    while (getline(file, line))
+    {
+        //if they have something in them
+        if (!line.empty())
+        {
+            //get the length of the line
+            int length = line.length()-1;
+            //parse from end to beginning of line
+            for (int i = length; i >= 0; i--)
+            {
+                //if it's a capital, lowercase it
+                line[i] = tolower(line[i]);
+                //get it's ascii code
+                int ascii = toascii(line[i]);
+
+                //if it's a space, move on
+                if (ascii == 32)
+                {
+                    continue;
+                }
+                    //if it's not between 97 and 122 (a-z) delete it
+                else if (ascii > 122 || ascii < 97)
+                {
+                    line.erase(i, 1);
+                }
+            }
+            //variables to split string
+            string split;
+            stringstream stream(line);
+
+            //while there are more words (split by space)
+            while(getline(stream, split, ' '))
+            {
+                //search split word, printing any misspelled words
+                binarySearchTree.Search(split, binarySearchTree.root);
+            }
+
+        }
+    }
+
+    //close the file
+    file.close();
 
     cin.ignore();
 

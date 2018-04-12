@@ -10,18 +10,38 @@ using namespace std;
 class BinarySearchTree
 {
 private:
-    NodePointer root;
+
+    void SingleRightRotate(NodePointer &node);
+
+    void SingleLeftRotate(NodePointer &node);
+
+    void DoubleRightRotate(NodePointer &node);
+
+    void DoubleLeftRotate(NodePointer &node);
+
+    int HeightOf(NodePointer &node);
 
 public:
+    NodePointer root;
+
     BinarySearchTree() : root(nullptr) {}
 
-    void Insert(int number);
+    void Insert(string value);
 
-    void Insert(int number, NodePointer &node);
+    void Insert(string value, NodePointer &node);
 
-    void Remove(int number);
+    void Remove(string value);
+
+    void Search(string value, NodePointer &node);
+
+
+
+
 
     void PrintTree(ostream& output, NodePointer &node, int indent);
+
+    void ReadFromFile(BinarySearchTree &tree, string fileName);
+
 
     friend ostream& operator<< (ostream &output, BinarySearchTree &binarySearchTree);
 
