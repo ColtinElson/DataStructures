@@ -10,7 +10,7 @@ class FileHandler
 
 public:
     void ReadFileIntoArray(string FileName, string* array, int arraySize);
-
+    void ReadFileWordsIntoArray(string FileName, string* array, int arraySize);
 };
 
 

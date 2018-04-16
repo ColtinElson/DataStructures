@@ -8,18 +8,17 @@
 #include <iostream>
 #include "HashNode.h"
 
-#define SIZE 13;
-
 using namespace std;
 
 class HashTable
 {
 private:
     HashNode **hashTable;
+    const int SIZE = 13;
 public:
     HashTable()
     {
-        hashTable = new HashNode *[13]();
+        hashTable = new HashNode *[SIZE]();
     }
 
     bool find(string value);
