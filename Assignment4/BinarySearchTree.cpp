@@ -66,11 +66,6 @@ void BinarySearchTree::Insert(string value, NodePointer &node)
     }
 }
 
-void BinarySearchTree::Remove(string value)
-{
-
-}
-
 //search through the tree to see if you the value exists
 void BinarySearchTree::Search(string value, NodePointer &node)
 {

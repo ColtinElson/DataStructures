@@ -30,13 +30,7 @@ public:
 
     void Insert(string value, NodePointer &node);
 
-    void Remove(string value);
-
     void Search(string value, NodePointer &node);
-
-
-
-
 
     void PrintTree(ostream& output, NodePointer &node, int indent);
 
