@@ -1,3 +1,7 @@
+//
+// Created by Coltin Elson on 4/16/18.
+//
+
 #ifndef ASSIGNMENT5_FILEHANDLER_H
 #define ASSIGNMENT5_FILEHANDLER_H
 

@@ -1,3 +1,8 @@
+//
+// Created by Coltin Elson on 4/16/18.
+// based on code from Hal O'connell
+//
+
 #include "FileHandler.h"
 #include <fstream>
 #include <sstream>

@@ -1,4 +1,10 @@
+//
+// Created by Coltin Elson on 4/16/18.
+// based on code from Hal O'connell
+//
+
 #include "HashTable.h"
+#include "LinkedList.h"
 
 //converts string value into int key for hash table
 int HashTable::hashFunction(string keyString)
@@ -28,7 +34,8 @@ bool HashTable::find(string value)
 {
     //start at first node
     int i = 0;
-    HashNode *node = hashTable[i];
+    LinkedList *list = hashTable[i];
+    HashNode *node = list->first;
 
     //loop through until end of hashtable has been found
     while (i < SIZE)
@@ -52,7 +59,8 @@ bool HashTable::find(string value)
                 i++;
                 if (i < SIZE)
                 {
-                    node = hashTable[i];
+                    list = hashTable[i];
+                    node = list->first;
                 }
             }
         }
@@ -66,37 +74,23 @@ bool HashTable::find(string value)
 }
 
 //insert a value into table, checking for collisions
+//each hash table entry is a linked list i.e. (hashTable[i] is a linked list)
 void HashTable::insert(string value)
 {
     //hash the value
     int hashKey = hashFunction(value);
 
-    HashNode *previous = nullptr;
-    //make a new node from that key
-    HashNode *node = hashTable[hashKey];
+    //make a new list from that key
+    LinkedList *list = hashTable[hashKey];
 
-    //while the node is not null, loop through until you hit null
-    while (node != nullptr)
+    //if list is empty, initialize it
+    if (list == nullptr)
     {
-        previous = node;
-        node = node->next;
+        hashTable[hashKey] = new LinkedList();
     }
 
-    //make a new node with the given key and value
-    if (node == nullptr)
-    {
-        node = new HashNode(hashKey, value);
-        //if the node doesn't have a previous (not a collision spot), just insert it
-        if (previous == nullptr)
-        {
-            hashTable[hashKey] = node;
-        }
-            //otherwise, set the previous's next (aka, a new node in that index) to the node
-        else
-        {
-            previous->next = node;
-        }
-    }
+    //add value to the linked list
+    hashTable[hashKey]->Add(value);
 }
 
 //loop through all nodes and node next's printing each value
@@ -105,7 +99,8 @@ void HashTable::PrintTable()
 {
     int index = 0;
     int collisionCount = 0;
-    HashNode *node = hashTable[index];
+    LinkedList *list = hashTable[index];
+    HashNode *node = list->first;
     cout << "Node #" << index+1 << ": ";
     while (index < SIZE)
     {
@@ -121,7 +116,8 @@ void HashTable::PrintTable()
             index++;
             if (index < SIZE)
             {
-                node = hashTable[index];
+                list = hashTable[index];
+                node = list->first;
                 cout << endl << "Node #" << index+1 << ": ";
             }
         }

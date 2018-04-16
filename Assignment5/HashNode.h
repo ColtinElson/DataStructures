@@ -1,3 +1,8 @@
+//
+// Created by Coltin Elson on 4/16/18.
+// based on code from Hal O'connell
+//
+
 #ifndef ASSIGNMENT5_HASHNODE_H
 #define ASSIGNMENT5_HASHNODE_H
 
@@ -8,8 +13,7 @@ using namespace std;
 class HashNode
 {
 public:
-    HashNode(int key, string value) : key(key), value(value), next(nullptr) {}
-    int key;
+    HashNode(string value) :value(value), next(nullptr) {}
     string value;
     HashNode *next;
 };
